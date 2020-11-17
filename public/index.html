@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ar Plus Radio Taxis</title>
+    <style> 
+        table, td, th { 
+            border: 1px solid #ddd; 
+            text-align: left; 
+        } 
+        table { 
+            border-collapse: collapse; 
+            width: 50%; 
+        } 
+        .table-data{ 
+            position: relative; 
+            left:150px; 
+            top:100px; 
+        } 
+        th, td { 
+            padding: 12px; 
+        } 
+        </style>
 </head>
 <body>
     <h2>Acceso Denegado</h2>
+    <table id="lstUnidades">
+        <thead>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>PLACA</th>
+            <th>MODELO</th>
+            <th>MARCA</th>
+            <th>GEO</th>
+            <th>EVAL</th>
+        </thead>
+        <tbody></tbody>
+    </table>
     <script src="socket.io/socket.io.js"></script>
     <script>
         var socket=io();
@@ -20,6 +50,19 @@
         socket.on('unidad-online',function(inidades){
             console.clear();
             console.table(inidades);  
+            var tabla=document.getElementById('lstUnidades');
+            //"#Your_Table tr>td").remove();
+            document.querySelector("#lstUnidades tr").remove();
+            inidades.forEach(element => {
+               var nRow=tabla.insertRow();
+               nRow.insertCell().appendChild(document.createTextNode(element.id));
+               nRow.insertCell().appendChild(document.createTextNode(element.nombre));
+               nRow.insertCell().appendChild(document.createTextNode(element.placa));
+               nRow.insertCell().appendChild(document.createTextNode(element.modelo));
+               nRow.insertCell().appendChild(document.createTextNode(element.marca));
+               nRow.insertCell().appendChild(document.createTextNode(element.lat + " " + element.lng));
+               nRow.insertCell().appendChild(document.createTextNode(element.calificacion));                     
+           });
         })
 
         socket.emit('unidad-add',{

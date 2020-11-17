@@ -1,7 +1,7 @@
 {
   "name": "api_server_tax",
   "version": "1.0.0",
-  "description": "Servidor API para Sentran del Taxis",
+  "description": "Servidor API para Central del Taxis",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

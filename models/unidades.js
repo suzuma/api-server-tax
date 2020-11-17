@@ -19,11 +19,11 @@ class Unidades{
         return this.unidades;
     }
 
-    calificarUnidad(id='',calificacion=0){
+    calificarUnidad(id='',nCalificacion=0){
         this.unidades=this.unidades.map(unidad=>{
             if(unidad.id==id){
                 //se promedia la calificación
-                unidad.calificacion=(unidad.calificacion+calificacion)/2;
+                unidad.calificacion=(unidad.calificacion+nCalificacionclear)/2;
                 return unidad;
             }else{
                 return unidad;
