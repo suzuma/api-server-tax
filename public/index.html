@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ar Plus Radio Taxis</title>
+</head>
+<body>
+    <h2>Acceso Denegado</h2>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        var socket=io();
+        socket.on('connect',function(){
+            console.log('CONECTADO CON EL SERVIDOR');
+        });
+        socket.on('disconnect',function(){
+            console.log('PERDIMOS LA CONECCION CON EL SERVIDOR');
+        });
+
+        socket.on('unidad-online',function(inidades){
+          console.log(inidades);  
+        })
+
+        socket.emit('unidad-add',{
+            nombre:'P01-1020',
+            placa:'VTX-1020',
+            modelo:'2020',
+            marca:'FORD',
+            lng:'-110.9661022',
+            lat:'29.110338'        
+        });
+
+    </script>
+
+</body>
+</html>
