@@ -18,7 +18,8 @@
         });
 
         socket.on('unidad-online',function(inidades){
-          console.log(inidades);  
+            console.clear();
+            console.table(inidades);  
         })
 
         socket.emit('unidad-add',{
