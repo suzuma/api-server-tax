@@ -7,7 +7,7 @@ const generarJWT = ( uid ) => {
             expiresIn:'24h'
         },(err,token)=>{
             if(err){
-            //no se pudo genera el token 
+                reject('No se pudo generar el JWT');
             }else{
                 resolve(token);
             }

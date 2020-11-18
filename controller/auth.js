@@ -47,6 +47,46 @@ const crearUsuario= async (req,res=response)=>{
     
 }
 
+const login=async (req,res=response)=>{
+    const {email, password}= req.body;
+    try{
+        const usuarioDb=await Usuario.findOne({email});
+        if(!usuarioDb){
+            return res.status(400).json({
+                ok:false,
+                msg:'Email no encontrado'
+            });
+        }
+        const validPassword=bcrypt.compareSync(password,usuarioDb.password);
+        if(!validPassword){
+            return res.status(400).json({
+                ok:false,
+                msg:'La contraseña no es valida'
+            });
+        }
+
+        // genera rl JWT
+        const token=await generarJWT(usuarioDb.id);
+        res.json({
+            ok:true,
+            usuario:usuarioDb,
+            token
+        });
+
+    }catch(error){
+        console.log(error);
+        res.status(500).json({
+            ok:false,
+            msg:'Hable al administrdor'
+        }); 
+    }
+
+    return res.json({
+        ok:true,
+        msg:'login'
+    });
+}
+
 module.exports = {
-    crearUsuario
+    crearUsuario, login 
 }

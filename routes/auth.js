@@ -17,4 +17,9 @@ router.post('/new',[
     validarCampos
 ],crearUsuario);
 
+router.post('/',[
+    check('email','Email es requerido').isEmail(),
+    check('password','Password es requerido').not().isEmpty()
+],login);
+
 module.exports=router;
